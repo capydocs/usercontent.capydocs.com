@@ -5,9 +5,11 @@ The site is generated with [Eleventy](https://www.11ty.dev/) and ready to deploy
 
 ## What's included?
 
-- `index.html`: visual gallery of every theme stored under `themes/`.
+- `index.html`: visual gallery for every plugin stored under `plugins/` and every theme stored under `themes/`.
+- `plugins.json`: machine-friendly endpoint exposing each plugin's `plugin.json` metadata.
 - `themes.json`: machine-friendly endpoint exposing each folder's `theme.json` metadata.
-- Direct passthrough of the `themes/` directory so consumers can fetch the assets untouched.
+- Direct passthrough of the `plugins/` and `themes/` directories so consumers can fetch the assets untouched.
+- Post-build ZIP archives for every plugin and theme under `/plugins/<name>.zip` and `/themes/<name>.zip`.
 
 ## Local development
 
@@ -16,7 +18,9 @@ npm install
 npm run dev # starts a dev server with live reload
 ```
 
-The data is sourced from the `themes/` folder. Each subdirectory must include a valid `theme.json` following the format described in `themes/README.md`.
+The data is sourced from the `plugins/` and `themes/` folders. Each plugin subdirectory must include a valid `plugin.json`
+following the format described in `plugins/README.md`. Each theme subdirectory must include a valid `theme.json` following
+the format described in `themes/README.md`.
 
 ## Production build
 

@@ -3,26 +3,31 @@ const fs = require("node:fs");
 const fsPromises = require("node:fs/promises");
 const archiver = require("archiver");
 
-async function createThemeZips() {
-  const themesDir = path.join(__dirname, "themes");
-  const siteThemesDir = path.join(__dirname, "_site", "themes");
-  const entries = await fsPromises.readdir(themesDir, { withFileTypes: true });
-  const themeDirectories = entries.filter((entry) => entry.isDirectory());
+async function createZipsFor(directoryName) {
+  const sourceRoot = path.join(__dirname, directoryName);
 
-  if (themeDirectories.length === 0) {
+  if (!fs.existsSync(sourceRoot)) {
     return;
   }
 
-  await fsPromises.mkdir(siteThemesDir, { recursive: true });
+  const entries = await fsPromises.readdir(sourceRoot, { withFileTypes: true });
+  const folders = entries.filter((entry) => entry.isDirectory());
 
-  for (const dir of themeDirectories) {
-    const sourceDir = path.join(themesDir, dir.name);
-    const zipPath = path.join(siteThemesDir, `${dir.name}.zip`);
-    await zipTheme(sourceDir, zipPath, dir.name);
+  if (folders.length === 0) {
+    return;
+  }
+
+  const targetRoot = path.join(__dirname, "_site", directoryName);
+  await fsPromises.mkdir(targetRoot, { recursive: true });
+
+  for (const folder of folders) {
+    const sourceDir = path.join(sourceRoot, folder.name);
+    const zipPath = path.join(targetRoot, `${folder.name}.zip`);
+    await zipDirectory(sourceDir, zipPath, folder.name);
   }
 }
 
-function zipTheme(sourceDir, destinationPath, rootFolderName) {
+function zipDirectory(sourceDir, destinationPath, rootFolderName) {
   return new Promise((resolve, reject) => {
     const output = fs.createWriteStream(destinationPath);
     const archive = archiver("zip", { zlib: { level: 9 } });
@@ -40,14 +45,16 @@ function zipTheme(sourceDir, destinationPath, rootFolderName) {
 }
 
 module.exports = function (eleventyConfig) {
-  // Expose raw theme folders so the manifest URLs keep working.
+  // Expose raw assets so the manifest URLs keep working.
   eleventyConfig.addPassthroughCopy({ themes: "themes" });
+  eleventyConfig.addPassthroughCopy({ plugins: "plugins" });
   eleventyConfig.addPassthroughCopy("CNAME");
   eleventyConfig.addPassthroughCopy({ static: "static" });
   eleventyConfig.addWatchTarget("themes");
+  eleventyConfig.addWatchTarget("plugins");
 
   eleventyConfig.on("eleventy.after", async () => {
-    await createThemeZips();
+    await Promise.all([createZipsFor("themes"), createZipsFor("plugins")]);
   });
 
   return {

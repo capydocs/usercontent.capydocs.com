@@ -1,7 +1,7 @@
 ---
 layout: base.njk
-title: Capydocs Themes
-description: Static gallery ready for Cloudflare Pages to list every custom theme from this repository.
+title: Capydocs Plugins & Themes
+description: List of plugins and themes to use along Capydocs.
 ---
 <style>
   .overview {
@@ -10,12 +10,51 @@ description: Static gallery ready for Cloudflare Pages to list every custom them
     line-height: 1.6;
   }
 
+  .collection {
+    margin-bottom: 3rem;
+  }
+
+  .section-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-header h2 {
+    margin: 0;
+  }
+
+  .section-kicker {
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: #6ce4ff;
+    margin: 0;
+  }
+
+  .section-subtitle {
+    margin: 0.5rem 0 0;
+    max-width: 640px;
+    color: #b5b9c3;
+    line-height: 1.5;
+  }
+
+  .section-count {
+    font-size: 0.9rem;
+    color: #b5b9c3;
+  }
+
+  .plugin-grid,
   .theme-grid {
     display: grid;
     gap: 1.5rem;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
 
+  .plugin-card,
   .theme-card {
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 1rem;
@@ -27,6 +66,7 @@ description: Static gallery ready for Cloudflare Pages to list every custom them
     gap: 0.75rem;
   }
 
+  .plugin-eyebrow,
   .theme-eyebrow {
     text-transform: uppercase;
     font-size: 0.75rem;
@@ -34,10 +74,12 @@ description: Static gallery ready for Cloudflare Pages to list every custom them
     color: #ffb4c8;
   }
 
+  .plugin-card h2,
   .theme-card h2 {
     margin: 0;
   }
 
+  .plugin-meta,
   .theme-meta {
     display: flex;
     flex-wrap: wrap;
@@ -46,12 +88,14 @@ description: Static gallery ready for Cloudflare Pages to list every custom them
     color: #b5b9c3;
   }
 
+  .plugin-meta span,
   .theme-meta span {
     background: rgba(255, 255, 255, 0.08);
     border-radius: 999px;
     padding: 0.25rem 0.8rem;
   }
 
+  .plugin-links,
   .theme-links {
     margin-top: auto;
     display: flex;
@@ -59,6 +103,7 @@ description: Static gallery ready for Cloudflare Pages to list every custom them
     gap: 0.75rem;
   }
 
+  .plugin-links a,
   .theme-links a {
     display: inline-flex;
     align-items: center;
@@ -73,13 +118,63 @@ description: Static gallery ready for Cloudflare Pages to list every custom them
 
 <section class="overview">
   <p>
-    Each folder inside <code>/themes</code> ships a <code>theme.json</code> manifest that Capydocs can ingest to register
-    a custom theme. Eleventy scans those folders to build both this gallery and the machine-friendly endpoint
-    <code><a href="/themes.json">/themes.json</a></code>, perfect for deployment automation.
+    Each folder inside <code>/plugins</code> ships a <code>plugin.json</code> manifest plus an iframe entry file. Eleventy
+    exposes those manifests, the raw assets, and <code><a href="/plugins.json">/plugins.json</a></code> so Capydocs can
+    auto-install custom handlers.
+  </p>
+  <p>
+    Each folder inside <code>/themes</code> ships a <code>theme.json</code> manifest that Capydocs ingests to register a
+    custom theme. The catalog below mirrors every folder and powers <code><a href="/themes.json">/themes.json</a></code>
+    for CI/CD pipelines.
   </p>
 </section>
 
-<section class="theme-grid">
+<section class="collection">
+  <div class="section-header">
+    <div>
+      <p class="section-kicker">Plugins</p>
+      <h2>Custom extension handlers</h2>
+      <p class="section-subtitle">
+        Bundle these folders under <code>/plugins</code> and Capydocs will load the entry iframe with the declared
+        sandbox permissions.
+      </p>
+    </div>
+    <span class="section-count">{{ plugins | length }} available</span>
+  </div>
+  <div class="plugin-grid">
+    {% for plugin in plugins %}
+      <article class="plugin-card">
+        <span class="plugin-eyebrow">Plugin</span>
+        <h2>{{ plugin.name }}</h2>
+        <p>{{ plugin.description or "No description" }}</p>
+        <div class="plugin-meta">
+          <span>ID: <code>{{ plugin.id }}</code></span>
+          <span>Entry: <code>{{ plugin.entry }}</code></span>
+          <span>Sandbox: <code>{{ plugin.sandbox or "default" }}</code></span>
+        </div>
+        <div class="plugin-links">
+          <a href="{{ plugin.entryUrl }}">Entry</a>
+          <a href="{{ plugin.manifestUrl }}">Manifest</a>
+          <a href="{{ plugin.zipUrl }}" download>ZIP</a>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="collection">
+  <div class="section-header">
+    <div>
+      <p class="section-kicker">Themes</p>
+      <h2>Visual styles</h2>
+      <p class="section-subtitle">
+        Each theme folder ships a manifest, CSS entrypoint, and any supporting assets. Drop them under
+        <code>/themes</code> inside your deployment target.
+      </p>
+    </div>
+    <span class="section-count">{{ themes | length }} available</span>
+  </div>
+  <div class="theme-grid">
   {% for theme in themes %}
     <article class="theme-card">
       <span class="theme-eyebrow">{{ theme.base | upper }} base</span>
@@ -97,4 +192,5 @@ description: Static gallery ready for Cloudflare Pages to list every custom them
       </div>
     </article>
   {% endfor %}
+</div>
 </section>
