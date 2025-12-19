@@ -1,6 +1,5 @@
 {
   "name": "Hello sample",
   "entry": "index.html",
-  "description": "Basic .hello handler that reloads on file changes and can save edits.",
-  "sandbox": "allow-scripts allow-same-origin"
+  "description": "Basic .hello handler that reloads on file changes and can save edits."
 }

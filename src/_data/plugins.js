@@ -27,7 +27,6 @@ function loadPlugins() {
           description: manifest.description || "",
           entry: entryFile,
           entryUrl: `/${path.posix.join(publicDir, entryFile)}`,
-          sandbox: manifest.sandbox || "",
           assetsUrl: `/${publicDir}`,
           manifestUrl: `/${path.posix.join(publicDir, "plugin.json")}`,
           zipUrl: `/${path.posix.join("plugins", `${entry.name}.zip`)}`,
