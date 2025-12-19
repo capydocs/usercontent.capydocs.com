@@ -1,0 +1,98 @@
+---
+layout: base.njk
+title: Capydocs Themes
+description: Static gallery ready for Cloudflare Pages to list every custom theme from this repository.
+---
+<style>
+  .overview {
+    margin-bottom: 2rem;
+    color: #cdd0d6;
+    line-height: 1.6;
+  }
+
+  .theme-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  .theme-card {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    backdrop-filter: blur(12px);
+    background: rgba(21, 23, 31, 0.85);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .theme-eyebrow {
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: #ffb4c8;
+  }
+
+  .theme-card h2 {
+    margin: 0;
+  }
+
+  .theme-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    color: #b5b9c3;
+  }
+
+  .theme-meta span {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    padding: 0.25rem 0.8rem;
+  }
+
+  .theme-links {
+    margin-top: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .theme-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border-radius: 0.75rem;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+</style>
+
+<section class="overview">
+  <p>
+    Each folder inside <code>/themes</code> ships a <code>theme.json</code> manifest that Capydocs can ingest to register
+    a custom theme. Eleventy scans those folders to build both this gallery and the machine-friendly endpoint
+    <code><a href="/themes.json">/themes.json</a></code>, perfect for deployment automation.
+  </p>
+</section>
+
+<section class="theme-grid">
+  {% for theme in themes %}
+    <article class="theme-card">
+      <span class="theme-eyebrow">{{ theme.base | upper }} base</span>
+      <h2>{{ theme.name }}</h2>
+      <p>{{ theme.description or "No description" }}</p>
+      <div class="theme-meta">
+        <span>ID: <code>{{ theme.id }}</code></span>
+        <span>Assets: <code>{{ theme.assetsUrl }}</code></span>
+      </div>
+      <div class="theme-links">
+        <a href="{{ theme.cssUrl }}">CSS</a>
+        <a href="{{ theme.assetsUrl }}/theme.json">Manifest</a>
+      </div>
+    </article>
+  {% endfor %}
+</section>

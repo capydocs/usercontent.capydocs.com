@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ title or "Capydocs User Content" }}</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background: #0f1115;
+        color: #f4f4f5;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      header,
+      main,
+      footer {
+        width: min(1100px, 100%);
+        margin: 0 auto;
+        padding: 2.5rem 1.5rem;
+      }
+
+      header {
+        padding-bottom: 0;
+      }
+
+      footer {
+        padding-top: 0;
+        font-size: 0.9rem;
+        opacity: 0.8;
+      }
+
+      a {
+        color: #ff6b90;
+      }
+
+      .page-title {
+        display: inline-flex;
+        align-items: center;
+        gap: 1rem;
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        margin: 0;
+      }
+
+      .page-title-icon {
+        width: clamp(48px, 8vw, 64px);
+        height: clamp(48px, 8vw, 64px);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.1);
+        display: grid;
+        place-items: center;
+        padding: 0.75rem;
+      }
+
+      .page-title-icon img {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      .page-description {
+        margin: 0.75rem 0 0;
+        color: #cdd0d6;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1 class="page-title">
+        <span class="page-title-icon">
+          <img src="/static/icon.min.svg" alt="Capydocs icon" width="64" height="64" />
+        </span>
+        <span>{{ title or "Capydocs User Content" }}</span>
+      </h1>
+      {% if description %}
+        <p class="page-description">{{ description }}</p>
+      {% endif %}
+    </header>
+    <main>
+      {{ content | safe }}
+    </main>
+    <footer>
+      Generated with Eleventy · View sources on <a href="https://github.com/capydocs/usercontent.capydocs.com">GitHub</a>.
+    </footer>
+  </body>
+</html>

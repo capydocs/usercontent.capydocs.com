@@ -1,0 +1,25 @@
+{
+  "name": "usercontent.capydocs.com",
+  "version": "1.0.0",
+  "description": "Capydocs public content for themes and plugins.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "eleventy --serve --watch",
+    "build": "eleventy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/capydocs/usercontent.capydocs.com.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/capydocs/usercontent.capydocs.com/issues"
+  },
+  "homepage": "https://github.com/capydocs/usercontent.capydocs.com#readme",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2"
+  }
+}

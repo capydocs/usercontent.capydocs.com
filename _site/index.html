@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Capydocs Themes</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background: #0f1115;
+        color: #f4f4f5;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      header,
+      main,
+      footer {
+        width: min(1100px, 100%);
+        margin: 0 auto;
+        padding: 2.5rem 1.5rem;
+      }
+
+      header {
+        padding-bottom: 0;
+      }
+
+      footer {
+        padding-top: 0;
+        font-size: 0.9rem;
+        opacity: 0.8;
+      }
+
+      a {
+        color: #ff6b90;
+      }
+
+      .page-title {
+        display: inline-flex;
+        align-items: center;
+        gap: 1rem;
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        margin: 0;
+      }
+
+      .page-title-icon {
+        width: clamp(48px, 8vw, 64px);
+        height: clamp(48px, 8vw, 64px);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.1);
+        display: grid;
+        place-items: center;
+        padding: 0.75rem;
+      }
+
+      .page-title-icon img {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      .page-description {
+        margin: 0.75rem 0 0;
+        color: #cdd0d6;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1 class="page-title">
+        <span class="page-title-icon">
+          <img src="/static/icon.min.svg" alt="Capydocs icon" width="64" height="64" />
+        </span>
+        <span>Capydocs Themes</span>
+      </h1>
+      
+        <p class="page-description">Static gallery ready for Cloudflare Pages to list every custom theme from this repository.</p>
+      
+    </header>
+    <main>
+      <style>
+  .overview {
+    margin-bottom: 2rem;
+    color: #cdd0d6;
+    line-height: 1.6;
+  }
+
+  .theme-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  .theme-card {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    backdrop-filter: blur(12px);
+    background: rgba(21, 23, 31, 0.85);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .theme-eyebrow {
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: #ffb4c8;
+  }
+
+  .theme-card h2 {
+    margin: 0;
+  }
+
+  .theme-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    color: #b5b9c3;
+  }
+
+  .theme-meta span {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    padding: 0.25rem 0.8rem;
+  }
+
+  .theme-links {
+    margin-top: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .theme-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border-radius: 0.75rem;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+</style>
+
+<section class="overview">
+  <p>
+    Each folder inside <code>/themes</code> ships a <code>theme.json</code> manifest that Capydocs can ingest to register
+    a custom theme. Eleventy scans those folders to build both this gallery and the machine-friendly endpoint
+    <code><a href="/themes.json">/themes.json</a></code>, perfect for deployment automation.
+  </p>
+</section>
+
+<section class="theme-grid">
+  
+    <article class="theme-card">
+      <span class="theme-eyebrow">DARK base</span>
+      <h2>Dark Red</h2>
+      <p>Sample crimson dark mode for testing custom theme overrides.</p>
+      <div class="theme-meta">
+        <span>ID: <code>dark-red</code></span>
+        <span>Assets: <code>/themes/dark-red</code></span>
+      </div>
+      <div class="theme-links">
+        <a href="/themes/dark-red/theme.css">CSS</a>
+        <a href="/themes/dark-red/theme.json">Manifest</a>
+      </div>
+    </article>
+  
+</section>
+
+    </main>
+    <footer>
+      Generated with Eleventy · View sources on <a href="https://github.com/capydocs/usercontent.capydocs.com">GitHub</a>.
+    </footer>
+  </body>
+</html>
