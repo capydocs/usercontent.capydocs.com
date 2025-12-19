@@ -1,7 +1,0 @@
-{
-  "id": "dark-red",
-  "name": "Dark Red",
-  "description": "Sample crimson dark mode for testing custom theme overrides.",
-  "base": "dark",
-  "css": "theme.css"
-}
