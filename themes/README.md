@@ -5,7 +5,7 @@ Copy any folder from here into `appLocalDataDir/themes/<theme-id>` (create the f
 ## Anatomy of a theme
 
 - Each theme lives in its own folder named after the `theme.json` `id`. When copied, match the folder name with the ID so reloads stay predictable.
-- `theme.json` is a small manifest with `id`, `name`, `css` (relative path to the stylesheet) and optional `description` plus `base` (`"light"` or `"dark"`). The Settings ▸ Appearance menu uses that metadata for labels and for deciding whether light or dark tokens should be the fallback.
+- `theme.json` is a small manifest with `id`, `name`, `version`, `css` (relative path to the stylesheet) and optional `description` plus `base` (`"light"` or `"dark"`). The Settings ▸ Appearance menu uses that metadata for labels and for deciding whether light or dark tokens should be the fallback.
 - `theme.css` runs as-is inside the desktop/web app, so regular selectors and CSS variables work without `:global(...)` prefixes. Use CSS variables defined in `src/app.scss` (`--bg`, `--fg`, `--card`, etc.) to keep consistency with built-in themes.
 - Changes are hot-reloaded: save the file and switch away/back to the theme in Settings to re-inject the CSS.
 

@@ -26,6 +26,7 @@ function loadThemes() {
           name: manifest.name || entry.name,
           description: manifest.description || "",
           base: manifest.base || "light",
+          version: manifest.version || "0.0.0",
           css: cssFile,
           cssUrl: `/${path.posix.join(publicDir, cssFile)}`,
           assetsUrl: `/${publicDir}`,
