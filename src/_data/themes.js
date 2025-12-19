@@ -29,6 +29,7 @@ function loadThemes() {
           css: cssFile,
           cssUrl: `/${path.posix.join(publicDir, cssFile)}`,
           assetsUrl: `/${publicDir}`,
+          zipUrl: `/${path.posix.join("themes", `${entry.name}.zip`)}`,
         };
       } catch (error) {
         console.warn(`Could not parse ${manifestPath}: ${error.message}`);
@@ -40,4 +41,3 @@ function loadThemes() {
 }
 
 module.exports = () => loadThemes();
-
